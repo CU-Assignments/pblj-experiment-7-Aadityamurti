@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class StudentApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        StudentController controller = new StudentController();
+
+        while (true) {
+            System.out.println("\n--- Student Menu ---");
+            System.out.println("1. Add Student");
+            System.out.println("2. View All Students");
+            System.out.println("3. Update Marks");
+            System.out.println("4. Delete Student");
+            System.out.println("5. Exit");
+            System.out.print("Choose option: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter ID: ");
+                    int id = sc.nextInt();
+                    System.out.print("Enter Name: ");
+                    String name = sc.next();
+                    System.out.print("Enter Department: ");
+                    String dept = sc.next();
+                    System.out.print("Enter Marks: ");
+                    double marks = sc.nextDouble();
+                    Student s = new Student(id, name, dept, marks);
+                    controller.createStudent(s);
+                    break;
+
+                case 2:
+                    controller.readStudents();
+                    break;
+
+                case 3:
+                    System.out.print("Enter ID to update: ");
+                    int uid = sc.nextInt();
+                    System.out.print("Enter new Marks: ");
+                    double newMarks = sc.nextDouble();
+                    controller.updateStudentMarks(uid, newMarks);
+                    break;
+
+                case 4:
+                    System.out.print("Enter ID to delete: ");
+                    int did = sc.nextInt();
+                    controller.deleteStudent(did);
+                    break;
+
+                case 5:
+                    sc.close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        }
+    }
+}
